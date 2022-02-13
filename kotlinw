@@ -1,0 +1,43 @@
+#!/bin/bash
+#   Copyright 2022 akiraly
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+kotlin_release_version=kotlin-compiler-1.6.10
+kotlin_release_distribution_filename=$kotlin_release_version.zip
+kotlin_release_url=https://github.com/JetBrains/kotlin/releases/download/v1.6.10/$kotlin_release_distribution_filename
+kotlin_releases_dir=./.kotlin/releases
+current_dir=$PWD
+
+if [ ! -e $kotlin_releases_dir/$kotlin_release_version ]
+then
+    mkdir -p $kotlin_releases_dir
+    cd $kotlin_releases_dir || exit
+    if [ ! -e $kotlin_release_distribution_filename ]
+    then
+      curl -L $kotlin_release_url -O
+    fi
+    if [ ! -e $kotlin_release_version ]
+    then
+      mkdir $kotlin_release_version
+      cd $kotlin_release_version || exit
+      unzip -qq ../$kotlin_release_distribution_filename
+      cd ..
+    fi
+    rm $kotlin_release_distribution_filename
+    cd "$current_dir" || exit
+fi
+
+PATH=$kotlin_releases_dir/$kotlin_release_version/kotlinc/bin:$PATH
+
+"$@"
