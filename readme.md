@@ -9,3 +9,8 @@ The scripts can download and put kotin on your PATH available for use
 Typical usage (you still need to make sure you have a correct JAVA_HOME env variable):
 
 `kotlinw kotlin -version`
+
+or
+
+`kotlinw kotlin hello.kts`
+

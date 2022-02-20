@@ -1,5 +1,7 @@
 @echo off
-rem   Copyright 2022 akiraly
+rem   Kotlin Wrapper 1.0
+rem
+rem   Copyright 2022 akiraly - https://github.com/akiraly/kotlinw
 rem
 rem   Licensed under the Apache License, Version 2.0 (the "License");
 rem   you may not use this file except in compliance with the License.
